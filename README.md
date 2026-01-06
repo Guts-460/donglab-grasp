@@ -1,6 +1,6 @@
 # donglab-grasp
+## A Deep Generativate Model Sampling Protein Favorable Folding Pathway <br>
 **Author**: Yanbing Wen, & Hao Dong* <br>
-A Deep Generativate Model Sampling Protein Favorable Folding Pathway <br>
 <br>
 **Institution**:
 State Key Laboratory of Analytical Chemistry for Life Science, <br>
