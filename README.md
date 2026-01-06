@@ -10,4 +10,4 @@ ChemBioMed Interdisciplinary Research Center at Nanjing University, & Institute 
 We are still updating this repository. <br>
 All code will be shared once manuscript is accepted.<br>
 
-An Example can be found at branch "Example"
+An application can be found at branch "Examples"
