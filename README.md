@@ -104,7 +104,7 @@ Once we have completed the construction of the data set (**2jof_aligned & 2jof_r
 ### 2.1 VAE
 We use the coordinates of the protein backbone atoms (C, N, CA, O) as both the input and output of the variational autoencoder (VAE, **train_vae.py**). You can adapt the model to different systems by tuning the hyperparameters shown in the figure below.  <br>
 <center>
-<img width="1200" height="744" alt="image" src="https://github.com/user-attachments/assets/80f8bc31-6494-4701-924a-9ba27deda177" />  <br>
+<img width="600" height="372" alt="image" src="https://github.com/user-attachments/assets/80f8bc31-6494-4701-924a-9ba27deda177" />  <br>
  <center>
 Run command: nohup python train_vae.py > train_vae.log 2>&1 & <br>
 All loss values are saved in loss/loss_vae.txt, and the network parameters are stored in models/vae.pth and models/vae-scaler.pth. <br>
