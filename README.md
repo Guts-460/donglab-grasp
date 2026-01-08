@@ -120,7 +120,7 @@ An attention mechanism is employed to assess how much the chosen (CVs) attend to
 ## 3 Sampling
 Next, we are preparing to sample the folding path of the Trap cage. Firstly, organize the files in the following format： <br>
 <center>
-<img width="1000" height=605" alt="image" src="https://github.com/user-attachments/assets/b5fe9944-41c1-43e3-a71d-672aa6f6d271" />  <br>
+<img width="1000" height=595" alt="image" src="https://github.com/user-attachments/assets/b5fe9944-41c1-43e3-a71d-672aa6f6d271" />  <br>
 <center>
 
 The descriptions are shown in **Table 1** <br>
