@@ -152,4 +152,4 @@ Table 1 Functions for sampling protein folding.<br>
 1	Krivov, G. G., Shapovalov, M. V. & Dunbrack, R. L. Improved prediction of protein side-chain conformations with SCWRL4. Proteins 77, 778-795 (2009). https://doi.org:10.1002/prot.22488 <br>
 2	Pan, X. J. et al. Expanding the space of protein geometries by computational design of de novo fold families. Science 369, 1132-+ (2020). https://doi.org:10.1126/science.abc0881 <br>
 3	Abramson, J. et al. Accurate structure prediction of biomolecular interactions with AlphaFold 3. Nature 630 (2024). https://doi.org:10.1038/s41586-024-07487-w <br>
-4	Lazaridis, T. & Karplus, M. Effective energy function for proteins in solution. Proteins 35, 133-152 (1999). https://doi.org:Doi 10.1002/(Sici)1097-0134(19990501)35:2<133::Aid-Prot1>3.0.Co;2-N <br>
+4	Lazaridis, T. & Karplus, M. Effective energy function for proteins in solution. Proteins 35, 133-152 (1999). https://doi.org:10.1002/(Sici)1097-0134(19990501)35:2<133::Aid-Prot1>3.0.Co;2-N <br>
