@@ -15,7 +15,7 @@ An application can be found at branch "Examples"  <br>
 ## Theory <br>
 Please read our manuscript titled as "..." <br>
 <center>
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/54dd12cc-d57b-4bfd-a6f4-ddad900db5f8" /> <br>
+<img width="1200" height="600" alt="image" src="https://github.com/user-attachments/assets/54dd12cc-d57b-4bfd-a6f4-ddad900db5f8" /> <br>
 <center>
 Fig. 1. Workflow of the DA2-GRASP algorithm. <br>
 
@@ -38,14 +38,18 @@ Sparse conformational collection refers to a discretized representation of a pro
 ### 1.1 Randomly conformations
 We removed the Metropolis criterion3 from the Monte Carlo simulation (MCS) protocol to rapidly sample backbone dihedral angles and generate unbiased random protein backbones.（**Site-packages/mcsoftware-corr-noP.tar**） <br>
 As an example, like trap-cage (or chignolin), you need prepare a file (.angs) describing the original distribution of dihedral angles, no matter its state as below: <br>
-<img width="982" height="689" alt="image" src="https://github.com/user-attachments/assets/a2cf4a52-b9dd-4534-9892-3c7e2e3ae778" /> <br>
+<center>
+<img width="1200" height="842" alt="image" src="https://github.com/user-attachments/assets/a2cf4a52-b9dd-4534-9892-3c7e2e3ae778" /> <br>
+<center>
 
 Then, run commands <br>
 mkdir 2jof_dir <nr>
 nohup ./mcs -I 2jof.angs -S 100000 -N 1 -K 1 -A 2 -F 1 -R 1 -O 2jof -X 2jof_dir > 2jof_dir.log 2>&1 & <br>
 
 On a single-core CPU, you will obtain 100,000 random backbones (mcs/2jof_dir) —each with the same chain length as Trap-cage—within 20 minutes (**Fig. 2**).  <br>
-<img width="416" height="270" alt="image" src="https://github.com/user-attachments/assets/bcc6db0d-e903-4821-ac17-a6d6e662253e" /> <br>
+<center>
+<img width="1200" height="800" alt="image" src="https://github.com/user-attachments/assets/bcc6db0d-e903-4821-ac17-a6d6e662253e" /> <br>
+ <center>
 Fig. 2 Random backbones <br>
 
 ### 1.2 Optimization
@@ -69,7 +73,9 @@ For any optimization process, you will receive the following files: <br>
 
 ### 1.3 Extract pdbs
 We prepared a bash script (**A-DATASET/extract_pdb.sh**) to extract structure optimized from 2jof_pdb_opt at given energy cutoff, like lower than 0 kJ/mol. You need define work files as below: <br>
-<img width="199" height="129" alt="image" src="https://github.com/user-attachments/assets/fc2e52ed-c02f-49b8-9859-6e15add4b905" /> <br>
+<center>
+<img width="800" height="520" alt="image" src="https://github.com/user-attachments/assets/fc2e52ed-c02f-49b8-9859-6e15add4b905" /> <br>
+ <center>
 ./minim2_dir is the contents like minim30000, minim65000 or minim100000 <br>
  <br>
 ./em1_dir save structures with energy < cutoff. <br>
@@ -84,7 +90,9 @@ All structures with energy < cutoff will be saved to 2jof_pdb_em, associated ene
  
 ### 1.4 Extract CVs
 We also prepared a python script to extract collective variables (CVs), associating any dynamic motion you want to study. In our work, we trained conformational transition with condition of ΔRMSD & ΔRg. Define the path and reference structure in the script (**A-DATASET/rg_rmsd_cal.py**) as below: <br>
-<img width="382" height="43" alt="image" src="https://github.com/user-attachments/assets/0c1ce692-ba6d-4e26-9ead-39b761acac01" />  <br>
+<center>
+<img width="1200" height="135" alt="image" src="https://github.com/user-attachments/assets/0c1ce692-ba6d-4e26-9ead-39b761acac01" />  <br>
+ <center>
 ./pdb_dir include structures saved with energy < cutoff, ref_pdb is the reference structure for RMSD-CA, and randomly selected from ./pdb_dir. <br>
 Then, run command: nohup python rg_rmsd_cal.py ./rg_rmsd_cal.log 2>&1 & <br> 
 All aligned structures will be saved in 2jof_aligned, all rmsd & rg will be saved in 2jof_rmsd_rg_em_032000.txt. <br>
@@ -95,7 +103,9 @@ All aligned structures will be saved in 2jof_aligned, all rmsd & rg will be save
 Once we have completed the construction of the data set (**2jof_aligned & 2jof_rmsd_rg_em_032000.txt**), we can start training DA2-GRASP, a thermodynamically favorable path sampling framework that combines deep generative models, data-driven approaches, and physical gradients. Change work content to **./B-TRAINING**.  <br>
 ### 2.1 VAE
 We use the coordinates of the protein backbone atoms (C, N, CA, O) as both the input and output of the variational autoencoder (VAE, **train_vae.py**). You can adapt the model to different systems by tuning the hyperparameters shown in the figure below.  <br>
-<img width="271" height="168" alt="image" src="https://github.com/user-attachments/assets/80f8bc31-6494-4701-924a-9ba27deda177" />  <br>
+<center>
+<img width="1200" height="744" alt="image" src="https://github.com/user-attachments/assets/80f8bc31-6494-4701-924a-9ba27deda177" />  <br>
+ <center>
 Run command: nohup python train_vae.py > train_vae.log 2>&1 & <br>
 All loss values are saved in loss/loss_vae.txt, and the network parameters are stored in models/vae.pth and models/vae-scaler.pth. <br>
 
@@ -109,7 +119,9 @@ An attention mechanism is employed to assess how much the chosen (CVs) attend to
  <br>
 ## 3 Sampling
 Next, we are preparing to sample the folding path of the Trap cage. Firstly, organize the files in the following format： <br>
-<img width="415" height="251" alt="image" src="https://github.com/user-attachments/assets/b5fe9944-41c1-43e3-a71d-672aa6f6d271" />  <br>
+<center>
+<img width="1200" height="726" alt="image" src="https://github.com/user-attachments/assets/b5fe9944-41c1-43e3-a71d-672aa6f6d271" />  <br>
+<center>
 
 The descriptions are shown in **Table 1** <br>
 
