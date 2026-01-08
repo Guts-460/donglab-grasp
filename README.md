@@ -91,7 +91,7 @@ All structures with energy < cutoff will be saved to 2jof_pdb_em, associated ene
 ### 1.4 Extract CVs
 We also prepared a python script to extract collective variables (CVs), associating any dynamic motion you want to study. In our work, we trained conformational transition with condition of ΔRMSD & ΔRg. Define the path and reference structure in the script (**A-DATASET/rg_rmsd_cal.py**) as below: <br>
 <center>
-<img width="1200" height="135" alt="image" src="https://github.com/user-attachments/assets/0c1ce692-ba6d-4e26-9ead-39b761acac01" />  <br>
+<img width="600" height="67" alt="image" src="https://github.com/user-attachments/assets/0c1ce692-ba6d-4e26-9ead-39b761acac01" />  <br>
  <center>
 ./pdb_dir include structures saved with energy < cutoff, ref_pdb is the reference structure for RMSD-CA, and randomly selected from ./pdb_dir. <br>
 Then, run command: nohup python rg_rmsd_cal.py ./rg_rmsd_cal.log 2>&1 & <br> 
