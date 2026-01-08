@@ -14,8 +14,10 @@ An application can be found at branch "Examples"  <br>
 
 ## Theory <br>
 Please read our manuscript titled as "..." <br>
-<img width="416" height="204" alt="image" src="https://github.com/user-attachments/assets/54dd12cc-d57b-4bfd-a6f4-ddad900db5f8" /> <br>
-Fig. 1. Workflow of the DA2-GRASP algorithm. 
+<center>
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/54dd12cc-d57b-4bfd-a6f4-ddad900db5f8" /> <br>
+<center>
+Fig. 1. Workflow of the DA2-GRASP algorithm. <br>
 
 ## 0 Environment Deployment <br>
 cudatoolkit = 11.8 <br>
