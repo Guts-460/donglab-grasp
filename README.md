@@ -48,7 +48,7 @@ nohup ./mcs -I 2jof.angs -S 100000 -N 1 -K 1 -A 2 -F 1 -R 1 -O 2jof -X 2jof_dir 
 
 On a single-core CPU, you will obtain 100,000 random backbones (mcs/2jof_dir) —each with the same chain length as Trap-cage—within 20 minutes (**Fig. 2**).  <br>
 <center>
-<img width="1200" height="800" alt="image" src="https://github.com/user-attachments/assets/bcc6db0d-e903-4821-ac17-a6d6e662253e" /> <br>
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/bcc6db0d-e903-4821-ac17-a6d6e662253e" /> <br>
  <center>
 Fig. 2 Random backbones <br>
 
