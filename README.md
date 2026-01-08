@@ -39,7 +39,7 @@ Sparse conformational collection refers to a discretized representation of a pro
 We removed the Metropolis criterion3 from the Monte Carlo simulation (MCS) protocol to rapidly sample backbone dihedral angles and generate unbiased random protein backbones.（**Site-packages/mcsoftware-corr-noP.tar**） <br>
 As an example, like trap-cage (or chignolin), you need prepare a file (.angs) describing the original distribution of dihedral angles, no matter its state as below: <br>
 <center>
-<img width="1200" height="842" alt="image" src="https://github.com/user-attachments/assets/a2cf4a52-b9dd-4534-9892-3c7e2e3ae778" /> <br>
+<img width="600" height="421" alt="image" src="https://github.com/user-attachments/assets/a2cf4a52-b9dd-4534-9892-3c7e2e3ae778" /> <br>
 <center>
 
 Then, run commands <br>
