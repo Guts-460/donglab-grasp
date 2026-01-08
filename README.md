@@ -74,7 +74,7 @@ For any optimization process, you will receive the following files: <br>
 ### 1.3 Extract pdbs
 We prepared a bash script (**A-DATASET/extract_pdb.sh**) to extract structure optimized from 2jof_pdb_opt at given energy cutoff, like lower than 0 kJ/mol. You need define work files as below: <br>
 <center>
-<img width="800" height="520" alt="image" src="https://github.com/user-attachments/assets/fc2e52ed-c02f-49b8-9859-6e15add4b905" /> <br>
+<img width="400" height="260" alt="image" src="https://github.com/user-attachments/assets/fc2e52ed-c02f-49b8-9859-6e15add4b905" /> <br>
  <center>
 ./minim2_dir is the contents like minim30000, minim65000 or minim100000 <br>
  <br>
