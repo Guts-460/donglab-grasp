@@ -28,6 +28,11 @@ GROMACS (2018.8, cpu) : https://manual.gromacs.org/2018.8/download.html <br>
 SCWRL4: https://dunbrack.fccc.edu/lab/scwrl <br>
 MCS (Recommend, but unnecessary) <br>
 
-## 1 Data set for VAE
-Sparse conformational collection refers to a discretized representation of a protein’s conformational ensemble, and multiple construction strategies exist. For mini-proteins (10–30 residues), a discrete conformational space can typically be obtained by randomly sampling backbone dihedral angles followed by structural refinement. For mid-proteins in this work, we used a annealing simulation to process random backbones and avoided lots of Kinetically unreachable conformations. In the future, for larger proteins, including middle and high weight proteins, we will test the loop-helix-loop unit combinatorial sampling algorithm (LUCS)1, previously shown to be capable of generating static proteins that differ in the local geometry of user-defined protein segments, and AlphaFold tools2 to enhance the quality of data set.
+## 1 Data set for VAE <br>
+Sparse conformational collection refers to a discretized representation of a protein’s conformational ensemble, and multiple construction strategies exist. For mini-proteins (10–30 residues), a discrete conformational space can typically be obtained by randomly sampling backbone dihedral angles followed by structural refinement. For mid-proteins in this work, we used a annealing simulation to process random backbones and avoided lots of Kinetically unreachable conformations. In the future, for larger proteins, including middle and high weight proteins, we will test the loop-helix-loop unit combinatorial sampling algorithm (LUCS)1, previously shown to be capable of generating static proteins that differ in the local geometry of user-defined protein segments, and AlphaFold tools2 to enhance the quality of data set. <br>
+
+## 1.1 Randomly conformations <br>
+We removed the Metropolis criterion3 from the Monte Carlo simulation (MCS) protocol to rapidly sample backbone dihedral angles and generate unbiased random protein backbones.（Site-packages/mcsoftware-corr-noP.tar） <br>
+As an example, like trap-cage (or chignolin), you need prepare a file (.angs) describing the original distribution of dihedral angles, no matter its state as below: <br>
+<img width="982" height="689" alt="image" src="https://github.com/user-attachments/assets/a2cf4a52-b9dd-4534-9892-3c7e2e3ae778" />
 
