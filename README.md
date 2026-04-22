@@ -8,7 +8,6 @@ Kuang Yaming Honors School, Chemistry and Biomedicine Innovation Center (ChemBIC
 ChemBioMed Interdisciplinary Research Center at Nanjing University, & Institute for Brain Sciences, Nanjing University, Nanjing 210023, China. <br>
 <br>
 We are still updating this repository. <br>
-All code will be shared once manuscript is accepted.<br>
 
 ## Code location <br>
 The training and testing code for the potential well model is located in the **ADWP** branch (https://github.com/Guts-460/donglab-grasp/tree/ADWP) <br>
