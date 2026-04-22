@@ -1,0 +1,24 @@
+; minim.mdp
+title                    = Energy Minimization with Implicit Solvent
+integrator               = cg     ; 最陡下降法（或 cg = 共轭梯度法）
+dt                       = 0.001 ; 
+nsteps                   = 200      ; 最大步数
+emtol                    = 0     ; 收敛阈值（kJ/mol/nm）; 
+emstep                   = 0.1      ; 初始步长（nm）；
+nstcgsteep                     = 100;
+niter                          = 20
+
+nstcalcenergy =1 
+nstenergy =1
+nstlog = 1
+
+; 隐式溶剂关键参数
+implicit-solvent         = GBSA        ; 隐式溶剂类型（gb = Generalized Born）
+gb-algorithm             = OBC       ; GB 算法（OBC/IStill/HCT）;sa-algorithm                   = None
+nstgbradii                     = 1
+rgbradii                       = 1
+gb_epsilon_solvent      = 80
+
+cutoff-scheme = group
+nstlist                        = 10 ;stepspercycle
+rlist = 1  ;pbc = no
