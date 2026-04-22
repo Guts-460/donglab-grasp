@@ -10,7 +10,10 @@ ChemBioMed Interdisciplinary Research Center at Nanjing University, & Institute 
 We are still updating this repository. <br>
 All code will be shared once manuscript is accepted.<br>
 
-An application can be found at branch "Examples"  <br>
+## Code location <br>
+The training and testing code for the potential well model is located in the **ADWP** branch <br>
+Find data available and examples for testing, please refer to branch **Trp-cage** <br>
+All other training and sampling code are as same as Trp-cage's <br>
 
 ## Theory <br>
 Please read our manuscript titled as "..." <br>
