@@ -16,7 +16,6 @@ Find data available and examples for testing, please refer to branch **Trp-cage*
 All other training and sampling code are as same as Trp-cage's <br>
 
 ## Theory <br>
-Please read our manuscript titled as "..." <br>
 <center>
 <img width="1200" height="600" alt="image" src="https://github.com/user-attachments/assets/54dd12cc-d57b-4bfd-a6f4-ddad900db5f8" /> <br>
 <center>
