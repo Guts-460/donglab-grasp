@@ -12,7 +12,7 @@ All code will be shared once manuscript is accepted.<br>
 
 ## Code location <br>
 The training and testing code for the potential well model is located in the **ADWP** branch (https://github.com/Guts-460/donglab-grasp/tree/ADWP) <br>
-Find data available and examples for testing, please refer to branch **Trp-cage** <br>
+Find data available and examples for testing, please refer to branch **Trp-cage** (https://github.com/Guts-460/donglab-grasp/tree/Trp-cage) <br>
 All other training and sampling code are as same as Trp-cage's <br>
 
 ## Theory <br>
