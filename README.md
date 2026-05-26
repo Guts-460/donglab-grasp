@@ -20,7 +20,7 @@ All other training and sampling code are as same as Trp-cage's <br>
 <center>
 Fig. 1. Workflow of the DA2-GRASP algorithm. <br>
 
-## 0 Environment Deployment <br>
+## Environment Deployment <br>
 cudatoolkit = 11.8 <br>
 torch = 2.0.0 <br>
 torchvision = 0.15.1 <br>
