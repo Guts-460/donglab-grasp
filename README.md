@@ -1,14 +1,6 @@
 # donglab-grasp
 ## A Deep Generativate Model Sampling Protein Favorable Folding Pathway <br>
 **Author**: Yanbing Wen, & Hao Dong* <br>
-<br>
-**Institution**:
-State Key Laboratory of Analytical Chemistry for Life Science, <br>
-Kuang Yaming Honors School, Chemistry and Biomedicine Innovation Center (ChemBIC), <br>
-ChemBioMed Interdisciplinary Research Center at Nanjing University, & Institute for Brain Sciences, Nanjing University, Nanjing 210023, China. <br>
-<br>
-We are still updating this repository. <br>
-All code will be shared once manuscript is accepted.<br>
 
 An application can be found at branch "Examples"  <br>
 
@@ -16,73 +8,64 @@ An application can be found at branch "Examples"  <br>
 ## 1 Data set for VAE
 Sparse conformational collection refers to a discretized representation of a protein’s conformational ensemble, and multiple construction strategies exist. For mini-proteins (10–30 residues), a discrete conformational space can typically be obtained by randomly sampling backbone dihedral angles followed by structural refinement. For mid-proteins in this work, we used a annealing simulation to process random backbones and avoided lots of Kinetically unreachable conformations. In the future, for larger proteins, including middle and high weight proteins, we will test the loop-helix-loop unit combinatorial sampling algorithm (LUCS)[2], previously shown to be capable of generating static proteins that differ in the local geometry of user-defined protein segments, and AlphaFold tools2 to enhance the quality of data set. <br>
 
+---
+**It should be noted that the dataset construction strategy is not unique; the protocol we provide serves only as a reference. Acquiring as many conformations as possible, along with their corresponding energies, will enable the model to capture richer conformational transition features.** <br>
+---
+
 ### 1.1 Randomly conformations
 We removed the Metropolis criterion3 from the Monte Carlo simulation (MCS) protocol to rapidly sample backbone dihedral angles and generate unbiased random protein backbones. <br>
 As an example, like trp-cage (or chignolin), you need prepare a file (.angs) describing the original distribution of dihedral angles, no matter its state as below: <br>
 
 Then, run commands <br>
-mkdir 2jof_dir <nr>
-nohup ./mcs -I 2jof.angs -S 100000 -N 1 -K 1 -A 2 -F 1 -R 1 -O 2jof -X 2jof_dir > 2jof_dir.log 2>&1 & <br>
+```bash
+mkdir 2jof_dir
+nohup ./mcs -I 2jof.angs -S 100000 -N 1 -K 1 -A 2 -F 1 -R 1 -O 2jof -X 2jof_dir > 2jof_dir.log 2>&1 &
+```
 
 On a single-core CPU, you will obtain 100,000 random backbones (mcs/2jof_dir) —each with the same chain length as Trp-cage—within 20 minutes.  <br>
 
 ### 1.2 Optimization
-Subsequently, the random conformations require a few hundred steps of conformational optimization to eliminate unphysical features such as incorrect bond lengths, bond angles, and dihedral angles (**cd A-DATASET**). <br>
-mkdir minim30000 minim65000 minim100000 <br>
- <br>
-cd minim30000 <br>
-nohup ./minim.sh 2jof_pdb_opt > 2jof_opt.log 2>&1 & <br>
- <br>
-cd minim65000 <br>
-nohup ./minim.sh 2jof_pdb_opt > 2jof_opt.log 2>&1 & <br>
- <br>
-cd minim100000 <br>
-nohup ./minim.sh 2jof_pdb_opt > 2jof_opt.log 2>&1 & <br>
- <br>
+Subsequently, the random conformations require a few hundred steps of conformational optimization to eliminate unphysical features such as incorrect bond lengths, bond angles, and dihedral angles (**cd examples/minim**). <br>
 
+```bash
+nohup ./minim.sh pdb_opt > opt.log 2>&1 & 
+```
 **output.txt** contains information including code & energy <br>
 
 ### 1.3 Extract pdbs
-We prepared a bash script (**A-DATASET/extract_pdb.sh**) to extract structure optimized from 2jof_pdb_opt at given energy cutoff, like lower than 0 kJ/mol. You need define work files as below: <br>
-<center>
-<img width="400" height="260" alt="image" src="https://github.com/user-attachments/assets/fc2e52ed-c02f-49b8-9859-6e15add4b905" /> <br>
- <center>
-./minim2_dir is the contents like minim30000, minim65000 or minim100000 <br>
- <br>
-./em1_dir save structures with energy < cutoff. <br>
-2jof_pdb_em.txt save energies < cutoff. <br>
-./noem1_dir save structures with energy > cutoff. <br>
+We prepared a bash script (**examples/extract_pdb.sh**) to extract structure optimized from pdb_opt at given energy cutoff, like lower than 0 kJ/mol. 
 
-Then, cd A-DATASET and run command: <br>
-./extract_pdb.sh minim30000 <br>
-./extract_pdb.sh minim65000 <br>
-./extract_pdb.sh minim100000 <br>
-All structures with energy < cutoff will be saved to 2jof_pdb_em, associated energy saved to 2jof_pdb_em.txt. <br>
+Then, cd /examples and run commands: <br>
+```bash
+./extract_pdb.sh minim30000
+./extract_pdb.sh minim65000
+./extract_pdb.sh minim100000
+```
+All structures with energy < cutoff will be saved to pdb_em, associated energy saved to pdb_em.txt. <br>
  
 ### 1.4 Extract CVs
-We also prepared a python script to extract collective variables (CVs), associating any dynamic motion you want to study. In our work, we trained conformational transition with condition of ΔRMSD & ΔRg. Define the path and reference structure in the script (**A-DATASET/rg_rmsd_cal.py**) as below: <br>
-<center>
-<img width="600" height="67" alt="image" src="https://github.com/user-attachments/assets/0c1ce692-ba6d-4e26-9ead-39b761acac01" />  <br>
- <center>
-./pdb_dir include structures saved with energy < cutoff, ref_pdb is the reference structure for RMSD-CA, and randomly selected from ./pdb_dir. <br>
-Then, run command: nohup python rg_rmsd_cal.py ./rg_rmsd_cal.log 2>&1 & <br> 
-All aligned structures will be saved in 2jof_aligned, all rmsd & rg will be saved in 2jof_rmsd_rg_em_032000.txt. <br>
+We also prepared a python script to extract collective variables (CVs), associating any dynamic motion you want to study. In our work, we trained conformational transition with condition of ΔRMSD & ΔRg. Define the path and reference structure in the script (**/examples/rg_rmsd_cal.py**) as below: <br>
+```bash
+nohup python rg_rmsd_cal.py ./rg_rmsd_cal.log 2>&1 &
+```
+All aligned structures will be saved in aligned, all rmsd & rg will be saved in rmsd_rg_em_examples.txt. <br>
 <br>
-**It should be noted that the dataset construction strategy is not unique; the protocol we provide serves only as a reference. Acquiring as many conformations as possible, along with their corresponding energies, will enable the model to capture richer conformational transition features.** <br>
 
+---
 ## 2 Train DA2-GRASP
-Once we have completed the construction of the data set (**2jof_aligned & 2jof_rmsd_rg_em_032000.txt**), we can start training DA2-GRASP, a thermodynamically favorable path sampling framework that combines deep generative models, data-driven approaches, and physical gradients. Change work content to **./B-TRAINING**.  <br>
+Once we have completed the construction of the data set (**2jof_aligned & 2jof_rmsd_rg_em_032000.txt**), we can start training DA2-GRASP, a thermodynamically favorable path sampling framework that combines deep generative models, data-driven approaches, and physical gradients. Change work content to **/TRAINING**.  <br>
 ### 2.1 VAE
-We use the coordinates of the protein backbone atoms (C, N, CA, O) as both the input and output of the variational autoencoder (VAE, **train_vae.py**). You can adapt the model to different systems by tuning the hyperparameters shown in the figure below.  <br>
-<center>
-<img width="600" height="372" alt="image" src="https://github.com/user-attachments/assets/80f8bc31-6494-4701-924a-9ba27deda177" />  <br>
- <center>
-Run command: nohup python train_vae.py > train_vae.log 2>&1 & <br>
+We use the coordinates of the protein backbone atoms (C, N, CA, O) as both the input and output of the variational autoencoder (VAE, **examples/TRAINING/train_vae.py**). 
+```bash
+nohup python train_vae.py > train_vae.log 2>&1 &
+```
+
 All loss values are saved in loss/loss_vae.txt, and the network parameters are stored in models/vae.pth and models/vae-scaler.pth. <br>
 
 ### 2.2 DataSet for Latent Conformation Transition
-To enable conformational transitions in the latent space (**Fig. 1a**), we trained a mapping model that takes (ΔCVij, hi) as input and predicts hj as output—thereby learning to transform conformation i into conformation j under the condition specified by ΔCVij. We provide a Python script (**data-mapping.py or data-mapping.ipynb**) that (1) extracts latent features (h) for each conformation and (2) constructs the training dataset comprising tuples of (ΔCVij, hi, hj). <br>
+To enable conformational transitions in the latent space, we trained a mapping model that takes (**ΔCV<sub>ij</sub>**, **h<sub>i</sub>**) as input and predicts hj as output—thereby learning to transform conformation i into conformation j under the condition specified by **ΔCV<sub>ij</sub>**. We provide a Python script (**pre_pairwise.py**) that extracts latent features (h) for each conformation. <br>
 
+---
 ### 2.3 Transformer-encoder
 An attention mechanism is employed to assess how much the chosen (CVs) attend to structural features, thereby evaluating their relevance and usefulness. Accordingly, we adopt a Transformer-encoder architecture as the mapping module for conformational transitions (Train-mapping.py). This design offers two key advantages:  <br>
 Ⅰ. Multi-head attention layers reduce reliance on any single CV by dynamically weighting their contributions; <br>
