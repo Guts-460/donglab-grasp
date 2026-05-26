@@ -17,21 +17,14 @@ An application can be found at branch "Examples"  <br>
 Sparse conformational collection refers to a discretized representation of a protein’s conformational ensemble, and multiple construction strategies exist. For mini-proteins (10–30 residues), a discrete conformational space can typically be obtained by randomly sampling backbone dihedral angles followed by structural refinement. For mid-proteins in this work, we used a annealing simulation to process random backbones and avoided lots of Kinetically unreachable conformations. In the future, for larger proteins, including middle and high weight proteins, we will test the loop-helix-loop unit combinatorial sampling algorithm (LUCS)[2], previously shown to be capable of generating static proteins that differ in the local geometry of user-defined protein segments, and AlphaFold tools2 to enhance the quality of data set. <br>
 
 ### 1.1 Randomly conformations
-We removed the Metropolis criterion3 from the Monte Carlo simulation (MCS) protocol to rapidly sample backbone dihedral angles and generate unbiased random protein backbones.（**Site-packages/mcsoftware-corr-noP.tar**） <br>
-As an example, like trap-cage (or chignolin), you need prepare a file (.angs) describing the original distribution of dihedral angles, no matter its state as below: <br>
-<center>
-<img width="600" height="421" alt="image" src="https://github.com/user-attachments/assets/a2cf4a52-b9dd-4534-9892-3c7e2e3ae778" /> <br>
-<center>
+We removed the Metropolis criterion3 from the Monte Carlo simulation (MCS) protocol to rapidly sample backbone dihedral angles and generate unbiased random protein backbones. <br>
+As an example, like trp-cage (or chignolin), you need prepare a file (.angs) describing the original distribution of dihedral angles, no matter its state as below: <br>
 
 Then, run commands <br>
 mkdir 2jof_dir <nr>
 nohup ./mcs -I 2jof.angs -S 100000 -N 1 -K 1 -A 2 -F 1 -R 1 -O 2jof -X 2jof_dir > 2jof_dir.log 2>&1 & <br>
 
-On a single-core CPU, you will obtain 100,000 random backbones (mcs/2jof_dir) —each with the same chain length as Trap-cage—within 20 minutes (**Fig. 2**).  <br>
-<center>
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/bcc6db0d-e903-4821-ac17-a6d6e662253e" /> <br>
- <center>
-Fig. 2 Random backbones <br>
+On a single-core CPU, you will obtain 100,000 random backbones (mcs/2jof_dir) —each with the same chain length as Trp-cage—within 20 minutes.  <br>
 
 ### 1.2 Optimization
 Subsequently, the random conformations require a few hundred steps of conformational optimization to eliminate unphysical features such as incorrect bond lengths, bond angles, and dihedral angles (**cd A-DATASET**). <br>
@@ -47,10 +40,7 @@ cd minim100000 <br>
 nohup ./minim.sh 2jof_pdb_opt > 2jof_opt.log 2>&1 & <br>
  <br>
 
-For any optimization process, you will receive the following files: <br>
-./2jof_pdb_opt contains all optimized conformations, <br>
-2jof_opt.log contains optimization logs <br>
-2jof_output.txt contains information including code & energy <br>
+**output.txt** contains information including code & energy <br>
 
 ### 1.3 Extract pdbs
 We prepared a bash script (**A-DATASET/extract_pdb.sh**) to extract structure optimized from 2jof_pdb_opt at given energy cutoff, like lower than 0 kJ/mol. You need define work files as below: <br>
