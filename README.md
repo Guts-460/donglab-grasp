@@ -71,20 +71,21 @@ An attention mechanism is employed to assess how much the chosen (CVs) attend to
 Ⅰ. Multi-head attention layers reduce reliance on any single CV by dynamically weighting their contributions; <br>
 Ⅱ. Feed-forward neural network (FNN) layers actively drive the transformation from conformation (i) to conformation (j). <br>
  <br>
- ```bash
+```bash
 nohup python train_mapping > train_mapping.log 2>&1 &
 ```
 
+---
 ## 3 Sampling
 Next, we are preparing to sample the folding path of the Trap cage. <br>
 Unfolded to folded state, usage:<br>
 ```bash
 nohup python da2_grasp.py -te 0 -m "u2f" -ss "[0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6]" -T 50 -Nd 8 > da2_grasp_u2f.log 2>&1 &
-''''
-And folded to unfolded state, usage:<br>
+```
 
+And folded to unfolded state, usage:<br>
 ```bash
-# nohup python da2_grasp.py -te 0 -m "u2f_reverse" -ss "[0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6]" -T 50 -Nd 8 > da2_grasp_u2f_reverse.log 2>&1 &
+nohup python da2_grasp.py -te 0 -m "u2f_reverse" -ss "[0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6]" -T 50 -Nd 8 > da2_grasp_u2f_reverse.log 2>&1 &
 ```
 
 Where <br> 
